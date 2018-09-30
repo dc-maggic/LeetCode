@@ -1,13 +1,4 @@
 var flipAndInvertImage = function(A) {
-    var i = A.length;
-    var j = A[0].length;
-    for(var row=0; row<i; row++){
-        for(var col=0; col<j; col++){
-            if (A[row][col] == 0){A[row][col] = 1;}
-            else{A[row][col] = 0;}
-        }
-        A[row].reverse();
-    }
-    return A;
+    return A.map(x => x.reverse().map(x => x === 1? 0 : 1))
 };
-//没有更好的办法了。
+//更简单的，没有想到可以先 map 里面的元素进行反转再 map
