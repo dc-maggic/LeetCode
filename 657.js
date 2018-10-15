@@ -1,8 +1,11 @@
 var judgeCircle = function(moves) {
-    var Moves = moves.split("");
-    U = Moves.filter(e=>e=="U").length;
-    D = Moves.filter(e=>e=="D").length;
-    L = Moves.filter(e=>e=="L").length;
-    R = Moves.filter(e=>e=="R").length;
-    return (U==D && L==R);
-};
+    var l = moves.length;
+    var x=0,y=0;
+    for(var i =0;i<l;i++){
+        if (moves[i]=="U") {x++;}
+        if(moves[i]=="D") {x--;}
+        if(moves[i]=="R") {y++;}
+        if(moves[i]=="L") {y--;}
+    }
+    return(x==0&&y==0);
+}
