@@ -35,4 +35,3 @@ var uniqueMorseRepresentations = function(words) {
     });
     };
     
-};
