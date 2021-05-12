@@ -12,12 +12,16 @@
  */
 var searchInsert = function(nums, target) {
     const l = nums.length
-    if(nums[0]===target||nums[0]>target) return 0
-    for(var i=1; i<l; i++){
-        if(nums[i]===target) return i;
-        if(nums[i-1]<target&&target <nums[i]) return i;
+    let left = 0, right = l - 1;
+    while(left<=right){
+        let m = ((right - left)>>1) + left;
+        if(nums[m]>=target){
+            right = m - 1;
+        }else{
+            left = m + 1;
+        }
     }
-    return l
+    return left
 };
 // @lc code=end
 
