@@ -23,15 +23,26 @@
  * @return {number[]}
  */
 var inorderTraversal = function(root) {
-    const res = [], stack = []
-    while(root || stack.length){
-        while(root){
-            stack.push(root)
-            root = root.left
+    const res = [];
+    let predecessor = null;
+    while(root){
+        if(root.left){
+            predecessor = root.left
+            while(predecessor.right && predecessor.right!=root){
+                predecessor = predecessor.right
+            }
+            if(!predecessor.right){
+                predecessor.right = root;
+                root = root.left
+            }else{
+                res.push(root.val);
+                predecessor.right = null;
+                root = root.right;
+            }
+        }else{
+            res.push(root.val)
+            root = root.right
         }
-        root = stack.pop()
-        res.push(root.val)
-        root = root.right
     }
     return res
 };
