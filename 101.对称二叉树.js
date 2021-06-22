@@ -19,12 +19,19 @@
  */
 var isSymmetric = function(root) {
     if(!root) return true
-    const checkNode = function(node1, node2){
-        if(node1===null ^ node2===null) return false
-        if(!node1 && !node2) return true
-        return node1.val===node2.val&&checkNode(node1.left,node2.right)&&checkNode(node1.right,node2.left)
+    let left, right
+    let stack = [root.left, root.right]
+    while(stack.length!==0){
+        left = stack.shift()
+        right = stack.shift()
+        if(!left && !right) continue
+        if((left===null ^ right===null) || (left.val!==right.val)) return false
+        stack.push(left.left)
+        stack.push(right.right)
+        stack.push(left.right)
+        stack.push(right.left)
     }
-    return checkNode(root.left, root.right)
+    return true
 };
 // @lc code=end
 
