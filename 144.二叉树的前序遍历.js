@@ -18,15 +18,14 @@
  * @return {number[]}
  */
 var preorderTraversal = function(root) {
-    const res = []
-    function getNode(node,r){
-        if(node){
-            if(node.val) r.push(node.val)
-            if(node.left) getNode(node.left,r)
-            if(node.right) getNode(node.right,r)
-        }
+    if(!root) return[]
+    const res = [], stack = [root]
+    while(stack.length){
+        root = stack.shift()
+        if(root.val) res.push(root.val)
+        if(root.right) stack.unshift(root.right)
+        if(root.left) stack.unshift(root.left)
     }
-    getNode(root,res)
     return res
 };
 // @lc code=end
