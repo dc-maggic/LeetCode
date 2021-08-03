@@ -19,15 +19,26 @@
  */
 var preorderTraversal = function(root) {
     if(!root) return[]
-    const res = [], stack = []
-    while(root || stack.length){
-        while(root){
+    const res = []
+    let predecessor = null;
+    while(root){
+        if(root.left) {
+            predecessor = root.left
+            while(predecessor.right && predecessor.right!=root){
+                predecessor = predecessor.right
+            }
+            if(!predecessor.right){
+                predecessor.right = root
+                res.push(root.val);
+                root = root.left;
+            }else if(predecessor.right == root){
+                predecessor.right = null;
+                root = root.right
+            }
+        }else {
             res.push(root.val)
-            stack.push(root)
-            root = root.left
+            root = root.right
         }
-        root = stack.pop()
-        root = root.right
     }
     return res
 };
