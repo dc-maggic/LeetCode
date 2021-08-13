@@ -10,11 +10,10 @@
  * @return {number}
  */
 var hammingWeight = function(n) {
-    if(n===0) return 0
-    let res=1
-    while(n>2){
-        if(n%2===1) res++
-        n = ~~(n/2)
+    let res = 0
+    while( n ){
+        n = n & (n-1)
+        ++res
     }
     return res
 };
