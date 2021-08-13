@@ -11,12 +11,12 @@
  */
 var reverseBits = function(n) {
     var res = 0,i=0
-    while(i<32){
-        res = res * 2 + n%2
-        if(n!==0) n = ~~(n/2)
-        i++
+    while(i<32 && n>0){
+        res |= (n & 1) << (31 - i);
+        n >>>= 1;
+        ++i
     }
-    return res
+    return res >>> 0
 };
 // @lc code=end
 
