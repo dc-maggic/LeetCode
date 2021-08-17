@@ -10,11 +10,10 @@
  * @return {number}
  */
 var trailingZeroes = function(n) {
-    let r = Number.parseInt(n/5), i = 25, res = r
-    while(res > 1) {
-        res = Number.parseInt(n/i)
-        i *= 5
-        r += res
+    let r = 0
+    while(n > 1) {
+        n = Number.parseInt(n/5)
+        r += n
     }
     return r
 };
