@@ -10,14 +10,8 @@
  * @return {number}
  */
 var majorityElement = function(nums) {
-    let l = nums.length, obj = {}, half = l/2
-    for(var i=0; i<l; i++){
-        let num = nums[i]
-        obj[num] = obj[num] + 1 || 1
-        if(obj[num]>half) {
-            return num
-        }
-    }
+    nums = nums.sort()
+    return nums[~~(nums.length/2)]
 };
 // @lc code=end
 
