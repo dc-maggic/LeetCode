@@ -10,16 +10,30 @@
  * @return {number}
  */
 var majorityElement = function(nums) {
-    let candidate = nums[0], count = 1, len = nums.length
-    for(var i=1; i<len; i++){
-        if(candidate===nums[i]) {
-            ++count
-        }else if(--count===0) {
-            candidate = nums[i]
-            count = 1
+    return majorityElementRec(nums, 0, nums.length - 1);
+};
+function majorityElementRec(nums, start, end) {
+    if(start === end) {
+        return nums[start]
+    }
+    let middle = ~~((end - start) / 2) + start,
+        left = majorityElementRec(nums, start, middle),
+        right = majorityElementRec(nums, middle+1, end)
+    if(left=== right) {
+        return left
+    }
+    let leftCount = countInRange(nums, left, start, end),
+        rightCount = countInRange(nums, right, start, end);
+    return leftCount > rightCount ? left : right
+}
+function countInRange(nums, num, start, end) {
+    let count = 0;
+    for (let i = start; i <= end; i++) {
+        if (nums[i] == num) {
+            count++;
         }
     }
-    return candidate
-};
+    return count;
+}
 // @lc code=end
 
