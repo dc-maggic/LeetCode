@@ -10,16 +10,16 @@
  * @return {number}
  */
 var majorityElement = function(nums) {
-    const l = nums.length
-    while(true) {
-        let candidate = nums[Math.floor(Math.random() * l)],
-            count = 0
-        for(var num of nums) {
-            if (num == candidate) ++count;
+    let candidate = nums[0], count = 1, len = nums.length
+    for(var i=1; i<len; i++){
+        if(candidate===nums[i]) {
+            ++count
+        }else if(--count===0) {
+            candidate = nums[i]
+            count = 1
         }
-        if (count > l / 2) return candidate;
     }
-    return -1
+    return candidate
 };
 // @lc code=end
 
