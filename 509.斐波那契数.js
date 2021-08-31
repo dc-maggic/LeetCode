@@ -10,6 +10,7 @@
  * @return {number}
  */
 var fib = function(n) {
+    if(n<2) return n
     let ary = [0,1,1], i = 2
     while(i<=n) {
         ary[2] = ary[1] + ary[0]
@@ -17,11 +18,7 @@ var fib = function(n) {
         ary[1] = ary[2]
         i++
     }
-    if(n>2) {
-        return ary[2]
-    } else {
-        return ary[n]
-    }
+    return ary[2]
 };
 // @lc code=end
 
