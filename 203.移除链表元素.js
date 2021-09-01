@@ -18,11 +18,16 @@
  * @return {ListNode}
  */
 var removeElements = function(head, val) {
-    if (head === null) {
-        return head;
+    const dummyHead = new ListNode(0,head)
+    let temp = dummyHead;
+    while (temp.next !== null) {
+        if (temp.next.val == val) {
+            temp.next = temp.next.next;
+        } else {
+            temp = temp.next;
+        }
     }
-    head.next = removeElements(head.next, val);
-    return head.val === val ? head.next : head;
+    return dummyHead.next;
 };
 // @lc code=end
 
