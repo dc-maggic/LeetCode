@@ -11,13 +11,15 @@
  * @return {number[]}
  */
 var twoSum = function(numbers, target) {
-    const obj = {}, len = numbers.length
-    for(var i=0; i<len; i++) {
-        const other = target - numbers[i]
-        if(obj[other]) {
-            return [obj[other], i+1]
-        }else {
-            obj[numbers[i]] = i+1
+    let left = 0, right = numbers.length - 1
+    while(left!=right) {
+        const sum = numbers[left]+numbers[right]
+        if(sum===target) {
+            return [left+1, right+1]
+        }else if(sum > target) {
+            right--
+        } else {
+            left++
         }
     }
 };
