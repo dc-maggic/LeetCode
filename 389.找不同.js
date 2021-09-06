@@ -11,20 +11,14 @@
  * @return {character}
  */
 var findTheDifference = function(s, t) {
-    const obj = {}, l = s.length
-    for(var i=0; i<l; i++) {
-        const o = s[i]
-        obj[o] = obj[o] ? obj[o] + 1 : 1
+    let ret = 0;
+    for (const ch of s) {
+        ret ^= ch.charCodeAt();
     }
-    for(var i=0; i<l; i++) {
-        const o =t[i]
-        if(!obj[o]) {
-            return o
-        } else {
-            obj[o] = obj[o] - 1
-        }
+    for (const ch of t) {
+        ret ^= ch.charCodeAt();
     }
-    return t[l]
+    return String.fromCharCode(ret);
 };
 // @lc code=end
 
