@@ -11,27 +11,20 @@
  * @return {boolean}
  */
 var wordPattern = function(pattern, s) {
-    let l = s.length,
-        word = '',
-        j = 0,
+    const words = s.split(' '),
+        l = words.length,
         p2s = {},
         s2p = {}
+    if(l!=pattern.length) return false
     for(var i=0; i<l; i++) {
-        if(s[i] != ' ') {
-            word += s[i]
-        } 
-        if(s[i]==' ' || i+1===l) {
-            const p = pattern[j]
-            if(p2s[p] && p2s[p]!==word || s2p[word] && s2p[word]!==p) {
-                return false
-            }
-            p2s[p] = word
-            s2p[word] = p
-            j++
-            word = ''
+        const p = pattern[i], w = words[i]
+        if(p2s[p] && p2s[p]!==w || s2p[w] && s2p[w]!==p) {
+            return false
         }
+        p2s[p] = w
+        s2p[w] = p
     }
-    return j===pattern.length ? true : false
+    return true
 };
 // @lc code=end
 
