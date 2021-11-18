@@ -11,9 +11,8 @@
  */
 var missingNumber = function(nums) {
     const l = nums.length
-    let sum = l
+    let sum = l * (l + 1) / 2
     for(var i=0; i<l; i++) {
-        sum += i;
         sum -= nums[i]
     }
     return sum
