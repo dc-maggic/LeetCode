@@ -25,40 +25,16 @@ var solution = function(isBadVersion) {
      * @return {integer} The first bad version
      */
     return function(n) {
-        if(n===1) return 1
-        let i = Math.ceil(n/2), version, last
-        while(i<n){
-            if(isBadVersion(i)){
-                version = i
-                if(last){
-                    // 有正常版本
-                    if(last+1===i){
-                        // 上一个是正常版本
-                        return i
-                    }else {
-                        i = Math.ceil( (i-last) / 2) + last
-                    }
-                }else{
-                    if(i===1){
-                        return 1
-                    }
-                    version = i
-                    i = Math.ceil(i/2)
-                }
-            }else {
-                last = i
-                if(n-i===1) {
-                    // 还有最后一个没校验就是最后一个。
-                    return n
-                } else if(i+1===version){
-                    // 下一个版本是坏的就是答案
-                    return version
-                }else {
-                    // 向后寻找
-                    i = Math.ceil((n-i)/2) + i
-                }
+        let left=1, right=n
+        while(left<right){
+            const mid = Math.floor(left + (right-left)/2)
+            if(isBadVersion(mid)){
+                right = mid
+            } else {
+                left = mid + 1
             }
         }
+        return left
     };
 };
 // @lc code=end
