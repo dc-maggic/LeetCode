@@ -11,45 +11,28 @@
  * @return {number}
  */
 var findMedianSortedArrays = function(nums1, nums2) {
-    const len = nums1.length + nums2.length
-    let k = Math.ceil(len/2)
-    if(len%2===0) {
-        return (findMidNum(nums1,nums2,k) + findMidNum(nums1,nums2,k+1)) / 2
-    } else {
-        return findMidNum(nums1,nums2,k)
+    let m = nums1.length, n = nums2.length
+    if(m>n) {
+        return findMedianSortedArrays(nums2, nums1)
     }
-};
-function findMidNum(nums1, nums2, k) {
-    let num1_os = 0,
-        num2_os = 0,
-        len1 = nums1.length,
-        len2 = nums2.length
-    while(true){
-        // 边界情况 1越界 2k=1
-        if(num2_os >= len2) {
-            return nums1[num1_os + k - 1]
-        }
-        if(num1_os >= len1) {
-            return nums2[num2_os + k - 1]
-        }
-        if(k===1){
-            return Math.min(nums1[num1_os], nums2[num2_os])
-        }
-        
-        const index = Math.floor(k/2),
-        // num1、num2 越界,可以选取对应数组中的最后一个元素,
-        // 必须根据排除数的个数减少 k 的值，
-        // 而不能直接将 k 减去 k/2
-            num1_i = Math.min(index + num1_os, len1) - 1,
-            num2_i = Math.min(index + num2_os, len2) - 1
-        if(nums1[num1_i] < nums2[num2_i]) {
-            k -= (num1_i - num1_os + 1)
-            num1_os = num1_i + 1
+    let left = 0, right = m,
+        m1 = 0, m2 = 0
+    while(left<=right) {
+        let i = Math.ceil((left + right) / 2),
+            j = Math.floor((m + n + 1) / 2) - i,
+            num1_im1 = i === 0 ? -Infinity : nums1[i - 1],
+            num1_i = i === m ? Infinity : nums1[i],
+            num2_jm1 =  j === 0 ? -Infinity : nums2[j - 1],
+            num2_j = j === n ? Infinity : nums2[j]
+        if(num1_im1 <= num2_j) {
+            m1 = Math.max(num1_im1, num2_jm1)
+            m2 = Math.min(num1_i, num2_j)
+            left = i + 1
         } else {
-            k -= (num2_i - num2_os + 1)
-            num2_os = num2_i + 1
+            right = i - 1
         }
     }
-}
+    return (m+n)%2===0 ? (m1+m2)/2 : m1
+};
 // @lc code=end
 
